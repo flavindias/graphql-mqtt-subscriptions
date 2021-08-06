@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as chai from 'chai';
 import {
   GraphQLSchema,
@@ -8,7 +9,7 @@ import {
   GraphQLID,
 } from 'graphql';
 
-import {SubscriptionManager, PubSub} from 'graphql-subscriptions';
+import { PubSub} from 'graphql-subscriptions';
 import {MQTTPubSub} from '../mqtt-pubsub';
 
 const expect = chai.expect;
@@ -98,7 +99,7 @@ const schema = new GraphQLSchema({
   }),
   types: [Comment, User],
 });
-
+// @ts-ignore
 describe('Benchmark EE PubSub', function () {
   const subManager = new SubscriptionManager({
     schema,
@@ -198,7 +199,7 @@ describe('Benchmark EE PubSub', function () {
       testEventsPerSecond.call(this, largeEventsPerSec, largeMessage, subManager, query, done);
     });
 
-    let mutationResult = {
+    const mutationResult = {
       content: 'Very good example',
       repoName: 'graphql-redis-subscriptions',
       attachedImage: 'https://avatars1.githubusercontent.com/u/2580920?v=3&s=466',
@@ -373,7 +374,7 @@ describe('Benchmark Redis PubSub', function () {
       testEventsPerSecond.call(this, largeEventsPerSec, largeMessage, subManager, query, done);
     });
 
-    let mutationResult = {
+    const mutationResult = {
       content: 'Very good example',
       repoName: 'graphql-redis-subscriptions',
       attachedImage: 'https://avatars1.githubusercontent.com/u/2580920?v=3&s=466',

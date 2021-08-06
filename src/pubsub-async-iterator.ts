@@ -32,6 +32,7 @@ import { PubSubEngine } from 'graphql-subscriptions/dist/pubsub-engine';
  */
 export class PubSubAsyncIterator<T> implements AsyncIterator<T> {
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private pullQueue: Function[];
   private pushQueue: any[];
   private eventsArray: string[];

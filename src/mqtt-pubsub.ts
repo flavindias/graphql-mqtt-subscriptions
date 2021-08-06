@@ -25,6 +25,7 @@ export class MQTTPubSub implements PubSubEngine {
   private subscribeOptionsResolver: SubscribeOptionsResolver;
   private publishOptionsResolver: PublishOptionsResolver;
   private mqttConnection: Client;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   private subscriptionMap: { [subId: number]: [string, Function] };
   private subsRefsMap: { [trigger: string]: Array<number> };
   private currentSubscriptionId: number;
@@ -108,14 +109,16 @@ export class MQTTPubSub implements PubSubEngine {
 
   public subscribe(
     trigger: string,
+    // eslint-disable-next-line @typescript-eslint/ban-types
     onMessage: Function,
+    // eslint-disable-next-line @typescript-eslint/ban-types
     options?: Object
   ): Promise<number> {
     const triggerName: string = this.triggerTransform(trigger, options);
     const id = this.currentSubscriptionId++;
     this.subscriptionMap[id] = [triggerName, onMessage];
 
-    let refs = this.subsRefsMap[triggerName];
+    const refs = this.subsRefsMap[triggerName];
     if (refs && refs.length > 0) {
       const newRefs = [...refs, id];
       this.subsRefsMap[triggerName] = newRefs;
@@ -208,10 +211,12 @@ export type Path = Array<string | number>;
 export type Trigger = string | Path;
 export type TriggerTransform = (
   trigger: Trigger,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   channelOptions?: Object
 ) => string;
 export type SubscribeOptionsResolver = (
   trigger: Trigger,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   channelOptions?: Object
 ) => Promise<IClientSubscribeOptions>;
 export type PublishOptionsResolver = (

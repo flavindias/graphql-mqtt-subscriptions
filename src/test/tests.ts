@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import { spy, restore } from 'simple-mock';
@@ -455,8 +456,8 @@ describe('Wildcards in subscription topic', function () {
   it('can subscribe to everything with "#" topic', function (done) {
     const pubSub = new MQTTPubSub();
     let sub;
-    let expectedMessages = ['test0', 'test1', 'test2', 'test3'];
-    let messages = [];
+    const expectedMessages = ['test0', 'test1', 'test2', 'test3'];
+    const messages = [];
     const onMessage = message => {
       try {
         if (messages.length === 3) {
@@ -485,8 +486,8 @@ describe('Wildcards in subscription topic', function () {
   it('can subscribe to only specific subset', function (done) {
     const pubSub = new MQTTPubSub();
     let sub;
-    let expectedMessages = ['test2', 'test3', 'test4'];
-    let messages = [];
+    const expectedMessages = ['test2', 'test3', 'test4'];
+    const messages = [];
     const onMessage = message => {
       try {
         if (expectedMessages.indexOf(message) > -1) {
